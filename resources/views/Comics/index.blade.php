@@ -3,7 +3,12 @@
 @section('content')
     <h1 class="text-center my-4">Comics</h1>
 
-    <div class="container">
+    <div class="container text-center">
+        @if (Session::has('success'))
+            <div class="alert alert-danger" role="alert">
+                {{ Session::get('success') }}
+            </div>
+        @endif
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -16,6 +21,7 @@
                     <th>Type</th>
                     <th>Details</th>
                     <th>Delete</th>
+                    <th>Update</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,10 +38,12 @@
                         </td>
                         <td>
                             <form method="POST" action="{{ route('comics.destroy', ['comic' => $comic->id]) }}">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
+                                @csrf
+                                @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
+                        </td>
+                        <td><a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-info">Update</a>
                         </td>
                     </tr>
                 @endforeach
