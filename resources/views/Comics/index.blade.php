@@ -40,7 +40,7 @@
                             <form method="POST" action="{{ route('comics.destroy', ['comic' => $comic->id]) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger" data-title="{{ $comic->title }}">Delete</button>
                             </form>
                         </td>
                         <td><a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-info">Update</a>
@@ -49,5 +49,7 @@
                 @endforeach
             </tbody>
         </table>
+
+        @include('partials.delete-modal')
     </div>
 @endsection
