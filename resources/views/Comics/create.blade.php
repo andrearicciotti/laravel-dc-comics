@@ -7,6 +7,16 @@
         <h1 class="my-4">New Comic</h1>
         <form action="{{ route('comics.store') }}" method="POST">
             @csrf
+
+            @if ($errors->any())
+                
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>                        
+                    @endforeach
+                </div>
+
+            @endif
     
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
